@@ -57,7 +57,7 @@ Resources:
         Api:
           Type: Api
           Properties:
-            Path: /user
+            Path: /read-apps
             Method: get
         ApiRoot:
           Type: Api
@@ -68,4 +68,4 @@ Resources:
 Outputs:
   ApiGatewayInvokeURL:
     Description: "API Gateway endpoint URL"
-    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/"
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/prod/"
