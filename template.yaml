@@ -45,34 +45,24 @@ AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
 
 Resources:
-  HelloWorldFunction:
+  ExpressFunction:
     Type: AWS::Serverless::Function
     Properties:
       CodeUri: src/
       Handler: app.handler
       Runtime: nodejs18.x
       MemorySize: 128
-      Timeout: 10
-      Events:
-        Api:
-          Type: Api
-          Properties:
-            Path: /
-            Method: get
-
-  UserFunction:
-    Type: AWS::Serverless::Function
-    Properties:
-      CodeUri: src/
-      Handler: app.handler
-      Runtime: nodejs18.x
-      MemorySize: 128
-      Timeout: 10
+      Timeout: 600
       Events:
         Api:
           Type: Api
           Properties:
             Path: /user
+            Method: get
+        ApiRoot:
+          Type: Api
+          Properties:
+            Path: /
             Method: get
 
 Outputs:
