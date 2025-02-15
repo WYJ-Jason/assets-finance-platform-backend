@@ -20,7 +20,8 @@ Resources:
       MemorySize: 256  
       Timeout: 300 
       Environment:
-        MONGODB_URI: "mongodb+srv://admin:qwer1234@jason-cluster.jgdfw.mongodb.net/assets-finance-platform?retryWrites=true&w=majority&appName=jason-cluster"
+        Variables:
+          MONGODB_URI: "mongodb+srv://admin:qwer1234@jason-cluster.jgdfw.mongodb.net/assets-finance-platform?retryWrites=true&w=majority&appName=jason-cluster"
       Events:
         ApiReadApps:
           Type: Api
