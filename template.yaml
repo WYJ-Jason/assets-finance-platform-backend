@@ -54,16 +54,30 @@ Resources:
       MemorySize: 128
       Timeout: 600
       Events:
-        Api:
+        ApiReadApps:
           Type: Api
           Properties:
             Path: /read-apps
             Method: get
+            Cors:
+              AllowMethods: "'GET,OPTIONS'"
+              AllowOrigin: "'*'"
+        ApiCreateApps:
+          Type: Api
+          Properties:
+            Path: /create-apps
+            Method: post
+            Cors:
+              AllowMethods: "'POST,OPTIONS'"
+              AllowOrigin: "'*'"
         ApiRoot:
           Type: Api
           Properties:
             Path: /
             Method: get
+            Cors:
+              AllowMethods: "'GET,OPTIONS'"
+              AllowOrigin: "'*'"
 
 Outputs:
   ApiGatewayInvokeURL:
