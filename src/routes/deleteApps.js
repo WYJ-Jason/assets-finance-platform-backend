@@ -1,12 +1,11 @@
 const express = require("express");
 const mongoose = require("mongoose");
-const Application = require("../models/applications"); // 确保路径正确
+const Application = require("../models/applications");
 
 const router = express.Router();
 
-// 删除应用的API
 router.delete("/", async (req, res) => {
-  const { id } = req.body; // 从请求体中获取id
+  const { id } = req.body; 
   if (!id) {
     return res.status(400).json({ message: "ID is required" });
   }

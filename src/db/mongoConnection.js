@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const uri = "mongodb+srv://admin:qwer1234@jason-cluster.jgdfw.mongodb.net/assets-finance-platform?retryWrites=true&w=majority&appName=jason-cluster";
+const uri = process.env.MONGODB_URI;
 
 const clientOptions = { serverApi: { version: '1', strict: true, deprecationErrors: true } };
 
