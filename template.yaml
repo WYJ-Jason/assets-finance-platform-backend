@@ -38,6 +38,12 @@ Resources:
             RestApiId: !Ref ExpressApi
             Path: /delete-apps
             Method: delete
+        ApiUpdateApps:
+          Type: Api
+          Properties:
+            RestApiId: !Ref ExpressApi
+            Path: /update-apps
+            Method: put
         ApiRoot:
           Type: Api
           Properties:
