@@ -30,33 +30,4 @@ jobs:
 
       - name: Deploy SAM Application
         run: |
-          sam deploy --no-confirm-changeset --stack-name assets-finance-platform-backend --capabilities CAPABILITY_IAM
-
-      - name: Update API Gateway Resource Policy (Allow Public Access)
-        run: |
-          API_ID=$(aws cloudformation describe-stacks --stack-name assets-finance-platform-backend --query "Stacks[0].Outputs[?OutputKey=='ApiGatewayRestApiId'].OutputValue" --output text --region ap-southeast-2)
-          aws apigateway update-rest-api --rest-api-id $API_ID --region ap-southeast-2 --patch-operations op=replace,path=/policy,value='{
-            "Version": "2012-10-17",
-            "Statement": [{
-              "Effect": "Allow",
-              "Principal": "*",
-              "Action": "execute-api:Invoke",
-              "Resource": "arn:aws:execute-api:ap-southeast-2:*:*"
-            }]
-          }'
-
-      - name: Ensure Lambda has Invoke Permissions
-        run: |
-          LAMBDA_ARN=$(aws cloudformation describe-stacks --stack-name assets-finance-platform-backend --query "Stacks[0].Outputs[?OutputKey=='LambdaFunctionArn'].OutputValue" --output text --region ap-southeast-2)
-          aws lambda add-permission \
-            --function-name "$LAMBDA_ARN" \
-            --statement-id AllowAPIGatewayInvoke \
-            --action lambda:InvokeFunction \
-            --principal apigateway.amazonaws.com \
-            --source-arn "arn:aws:execute-api:ap-southeast-2:*:*" \
-            --region ap-southeast-2
-
-      - name: Force Redeploy API Gateway
-        run: |
-          API_ID=$(aws cloudformation describe-stacks --stack-name assets-finance-platform-backend --query "Stacks[0].Outputs[?OutputKey=='ApiGatewayRestApiId'].OutputValue" --output text --region ap-southeast-2)
-          aws apigateway create-deployment --rest-api-id $API_ID --stage-name Prod --region ap-southeast-2
+          sam deploy --no-confirm-changeset --stack-name assets-finance-platform-backend --capabilities CAPABILITY_IAM --debug
