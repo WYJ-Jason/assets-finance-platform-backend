@@ -51,7 +51,7 @@ Resources:
       StageName: Prod
       Cors:
         AllowOrigin: "'*'"
-        AllowMethods: "'GET,POST,OPTIONS'"
+        AllowMethods: "'OPTIONS,GET,POST'"
         AllowHeaders: "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'"
 
   ExpressFunction:
@@ -60,10 +60,8 @@ Resources:
       CodeUri: src/
       Handler: app.handler
       Runtime: nodejs18.x
-      MemorySize: 256  # 增加内存
-      Timeout: 300  # 降低超时，避免资源占用过久
-      Policies:
-        - AWSLambdaBasicExecutionRole  # 赋予基本执行权限
+      MemorySize: 256  
+      Timeout: 300 
       Events:
         ApiReadApps:
           Type: Api
