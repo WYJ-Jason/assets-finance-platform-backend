@@ -45,41 +45,46 @@ AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
 
 Resources:
+  ExpressApi:
+    Type: AWS::Serverless::Api
+    Properties:
+      StageName: Prod
+      Cors:
+        AllowOrigin: "'*'"
+        AllowMethods: "'GET,POST,OPTIONS'"
+        AllowHeaders: "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'"
+
   ExpressFunction:
     Type: AWS::Serverless::Function
     Properties:
       CodeUri: src/
       Handler: app.handler
       Runtime: nodejs18.x
-      MemorySize: 128
-      Timeout: 600
+      MemorySize: 256  # 增加内存
+      Timeout: 300  # 降低超时，避免资源占用过久
+      Policies:
+        - AWSLambdaBasicExecutionRole  # 赋予基本执行权限
       Events:
         ApiReadApps:
           Type: Api
           Properties:
+            RestApiId: !Ref ExpressApi
             Path: /read-apps
             Method: get
-            Cors:
-              AllowMethods: "'GET,OPTIONS'"
-              AllowOrigin: "'*'"
         ApiCreateApps:
           Type: Api
           Properties:
+            RestApiId: !Ref ExpressApi
             Path: /create-apps
             Method: post
-            Cors:
-              AllowMethods: "'POST,OPTIONS'"
-              AllowOrigin: "'*'"
         ApiRoot:
           Type: Api
           Properties:
+            RestApiId: !Ref ExpressApi
             Path: /
             Method: get
-            Cors:
-              AllowMethods: "'GET,OPTIONS'"
-              AllowOrigin: "'*'"
 
 Outputs:
   ApiGatewayInvokeURL:
     Description: "API Gateway endpoint URL"
-    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/prod/"
+    Value: !Sub "https://${ExpressApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/"
