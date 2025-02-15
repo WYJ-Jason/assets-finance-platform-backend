@@ -36,6 +36,6 @@ const appSchema = new mongoose.Schema({
   liabilities: [liabilitySchema],
 });
 
-const App = mongoose.model('App', appSchema);
+const Applications = mongoose.model('applications', appSchema);
 
-module.exports = App; 
+module.exports = Applications; 
