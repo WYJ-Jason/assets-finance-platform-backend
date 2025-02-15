@@ -1,11 +1,10 @@
 const express = require("express");
-const Application = require("../models/applications"); // 确保路径正确
+const Application = require("../models/applications"); 
 
 const router = express.Router();
 
-// 更新应用的API
 router.put("/", async (req, res) => {
-  const { id, updateData } = req.body; // 从请求体中获取id和更新数据
+  const { id, updateData } = req.body; 
   if (!id || !updateData) {
     return res.status(400).json({ message: "ID and update data are required" });
   }
