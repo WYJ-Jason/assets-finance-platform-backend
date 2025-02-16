@@ -2,7 +2,55 @@
 
 ## Overview
 
-This document provides an overview of the CI/CD pipeline and backend architecture for the assets-finance-platform-backend project. It outlines the steps involved in the continuous integration and deployment process, as well as details about the backend services and their interactions.
+This document provides an overview of the backend architecture for the Assets Finance Platform Backend project.
+
+## Getting Started
+
+To get started with the assets-finance-platform-backend project, follow these steps:
+
+1. **Clone the Repository**:
+   - Use the following command to clone the repository to your local machine:
+     ```bash
+     git clone https://github.com/WYJ-Jason/assets-finance-platform-backend.git
+     ```
+
+2. **Install AWS SAM**:
+   - Follow the instructions on the [AWS SAM Installation Guide](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/install-sam-cli.html) to install the AWS SAM CLI.
+
+3. **Install Docker**:
+   - Download and install Docker from the [Docker website](https://www.docker.com/products/docker-desktop).
+
+4. **Build the Application**:
+   - Navigate to the project directory and run the following command to build the application:
+     ```bash
+     sam build
+     ```
+
+5. **Start the Local API**:
+   - To start the backend API locally, run:
+     ```bash
+     sam local start-api
+     ```
+   - This command will start the API locally, allowing you to test the endpoints.
+
+## Installation
+
+Before running the application or tests, make sure to install the necessary dependencies. You can do this by running the following command in the project directory:
+
+```bash
+cd src
+npm install
+```
+
+## Unit Tests
+
+To ensure the reliability of the application, unit tests are implemented for each API endpoint. You can run the unit tests using the following command:
+
+```bash
+npm test
+```
+
+This command will execute all the test files located in the `src/tests/unit` directory. Make sure to have all dependencies installed before running the tests.
 
 ## CI/CD Pipeline
 
@@ -46,11 +94,17 @@ src/
 │   └── mongoConnection.js 
 ├── models/              
 │   └── applications.js   
-└── routes/              
-    ├── createApps.js
-    ├── readApps.js
-    ├── updateApps.js
-    └── deleteApps.js
+├── routes/              
+│   ├── createApps.js
+│   ├── readApps.js
+│   ├── updateApps.js
+│   └── deleteApps.js
+└── tests/
+    └── unit/
+        ├── test-createApps.mjs
+        ├── test-readApps.mjs
+        ├── test-updateApps.mjs
+        └── test-deleteApps.mjs
 ```
 ### API Endpoints
 

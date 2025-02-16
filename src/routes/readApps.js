@@ -1,9 +1,9 @@
 const express = require("express");
 const router = express.Router();
-const AppModel = require("../models/applications"); 
+const AppModel = require("../models/applications");
 
 router.get("/", async (req, res) => {
-  const { email } = req.body; 
+  const { email } = req.body;
 
   try {
     let apps;
@@ -14,12 +14,12 @@ router.get("/", async (req, res) => {
     }
 
     if (apps.length === 0) {
-      return res.json({ message: "No Applications" }); 
+      return res.json({ message: "No Applications" });
     }
 
-    res.json(apps); 
+    res.json(apps);
   } catch (error) {
-    res.status(500).json({ message: "Error:", error: error.message }); 
+    res.status(500).json({ message: "Error:", error: error.message });
   }
 });
 
