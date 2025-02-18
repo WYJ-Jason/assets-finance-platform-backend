@@ -19,7 +19,7 @@ describe('GET /read-apps', () => {
   it('should return all applications if no email is provided', async () => {
     const mockApps = [
       { personalDetails: { name: 'John Doe', age: 30, email: 'john@example.com' } },
-      { personalDetails: { name: 'Jane Doe', age: 25, email: 'jane@example.com' } }
+      { personalDetails: { name: 'Jane Doe', age: 25, email: 'jane@example.com' } },
     ];
 
     sinon.stub(Applications, 'find').returns(mockApps);
@@ -32,14 +32,12 @@ describe('GET /read-apps', () => {
 
   it('should return applications filtered by email', async () => {
     const mockApps = [
-      { personalDetails: { name: 'John Doe', age: 30, email: 'john@example.com' } }
+      { personalDetails: { name: 'John Doe', age: 30, email: 'john@example.com' } },
     ];
 
     sinon.stub(Applications, 'find').returns(mockApps);
 
-    const res = await request(app)
-      .get('/read-apps')
-      .send({ email: 'john@example.com' });
+    const res = await request(app).get('/read-apps').send({ email: 'john@example.com' });
 
     expect(res.status).to.equal(200);
     expect(res.body).to.deep.equal(mockApps);
@@ -51,7 +49,7 @@ describe('GET /read-apps', () => {
     const res = await request(app).get('/read-apps');
 
     expect(res.status).to.equal(200);
-    expect(res.body).to.deep.equal({ message: "No Applications" });
+    expect(res.body).to.deep.equal({ message: 'No Applications' });
   });
 
   it('should return an error if there is a problem retrieving applications', async () => {
@@ -62,4 +60,4 @@ describe('GET /read-apps', () => {
     expect(res.status).to.equal(500);
     expect(res.body).to.have.property('message', 'Error:');
   });
-}); 
+});

@@ -24,14 +24,12 @@ describe('DELETE /delete-apps', () => {
       income: [],
       expenses: [],
       assets: [],
-      liabilities: []
+      liabilities: [],
     };
 
     sinon.stub(Application, 'findByIdAndDelete').returns(mockApp);
 
-    const res = await request(app)
-      .delete('/delete-apps')
-      .send({ id: mockId });
+    const res = await request(app).delete('/delete-apps').send({ id: mockId });
 
     expect(res.status).to.equal(200);
     expect(res.body).to.have.property('message', 'Application deleted successfully');
@@ -42,18 +40,14 @@ describe('DELETE /delete-apps', () => {
 
     sinon.stub(Application, 'findByIdAndDelete').returns(null);
 
-    const res = await request(app)
-      .delete('/delete-apps')
-      .send({ id: mockId });
+    const res = await request(app).delete('/delete-apps').send({ id: mockId });
 
     expect(res.status).to.equal(404);
     expect(res.body).to.have.property('message', 'Application not found');
   });
 
   it('should return 400 if id is missing', async () => {
-    const res = await request(app)
-      .delete('/delete-apps')
-      .send({}); // Missing id
+    const res = await request(app).delete('/delete-apps').send({}); // Missing id
 
     expect(res.status).to.equal(400);
     expect(res.body).to.have.property('message', 'ID is required');
@@ -64,9 +58,7 @@ describe('DELETE /delete-apps', () => {
 
     sinon.stub(Application, 'findByIdAndDelete').throws(new Error('Database error'));
 
-    const res = await request(app)
-      .delete('/delete-apps')
-      .send({ id: mockId });
+    const res = await request(app).delete('/delete-apps').send({ id: mockId });
 
     expect(res.status).to.equal(500);
     expect(res.body).to.have.property('message').that.includes('Internal server error');
