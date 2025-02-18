@@ -22,7 +22,7 @@ describe('POST /create-apps', () => {
       income: [{ source: 'Job', amount: 5000, date: new Date().toISOString() }],
       expenses: [{ description: 'Rent', amount: 1500, date: new Date().toISOString() }],
       assets: [{ description: 'Car', value: 20000 }],
-      liabilities: [{ description: 'Loan', amount: 5000 }]
+      liabilities: [{ description: 'Loan', amount: 5000 }],
     };
 
     // 模拟数据库返回的数据（带有 _id）
@@ -33,7 +33,7 @@ describe('POST /create-apps', () => {
       income: [{ ...newApp.income[0], _id: '67b160a2824fdc473535a47c' }],
       expenses: [{ ...newApp.expenses[0], _id: '67b160a2824fdc473535a47d' }],
       assets: [{ ...newApp.assets[0], _id: '67b160a2824fdc473535a47e' }],
-      liabilities: [{ ...newApp.liabilities[0], _id: '67b160a2824fdc473535a47f' }]
+      liabilities: [{ ...newApp.liabilities[0], _id: '67b160a2824fdc473535a47f' }],
     };
 
     sinon.stub(Applications.prototype, 'save').resolves(savedApp);
@@ -60,15 +60,15 @@ describe('POST /create-apps', () => {
     const cleanedResponse = removeIds(res.body);
 
     // 统一日期格式（转换为 ISO 字符串进行比较）
-    cleanedResponse.income.forEach(item => item.date = new Date(item.date).toISOString());
-    cleanedResponse.expenses.forEach(item => item.date = new Date(item.date).toISOString());
+    cleanedResponse.income.forEach((item) => (item.date = new Date(item.date).toISOString()));
+    cleanedResponse.expenses.forEach((item) => (item.date = new Date(item.date).toISOString()));
 
     expect(cleanedResponse).to.deep.equal(newApp);
   });
 
   it('should return an error if there is a problem saving the application', async () => {
     const newApp = {
-      personalDetails: { name: 'John Doe', age: 30, email: 'john@example.com' }
+      personalDetails: { name: 'John Doe', age: 30, email: 'john@example.com' },
     };
 
     sinon.stub(Applications.prototype, 'save').rejects(new Error('Database error'));

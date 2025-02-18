@@ -25,14 +25,12 @@ describe('PUT /update-apps', () => {
       income: [],
       expenses: [],
       assets: [],
-      liabilities: []
+      liabilities: [],
     };
 
     sinon.stub(Application, 'findByIdAndUpdate').returns(mockApp);
 
-    const res = await request(app)
-      .put('/update-apps')
-      .send({ id: mockId, updateData });
+    const res = await request(app).put('/update-apps').send({ id: mockId, updateData });
 
     expect(res.status).to.equal(200);
     expect(res.body).to.have.property('message', 'Application updated successfully');
@@ -45,18 +43,14 @@ describe('PUT /update-apps', () => {
 
     sinon.stub(Application, 'findByIdAndUpdate').returns(null);
 
-    const res = await request(app)
-      .put('/update-apps')
-      .send({ id: mockId, updateData });
+    const res = await request(app).put('/update-apps').send({ id: mockId, updateData });
 
     expect(res.status).to.equal(404);
     expect(res.body).to.have.property('message', 'Application not found');
   });
 
   it('should return 400 if id or updateData is missing', async () => {
-    const res = await request(app)
-      .put('/update-apps')
-      .send({ id: 'mocked_id' }); // Missing updateData
+    const res = await request(app).put('/update-apps').send({ id: 'mocked_id' }); // Missing updateData
 
     expect(res.status).to.equal(400);
     expect(res.body).to.have.property('message', 'ID and update data are required');
@@ -68,9 +62,7 @@ describe('PUT /update-apps', () => {
 
     sinon.stub(Application, 'findByIdAndUpdate').throws(new Error('Database error'));
 
-    const res = await request(app)
-      .put('/update-apps')
-      .send({ id: mockId, updateData });
+    const res = await request(app).put('/update-apps').send({ id: mockId, updateData });
 
     expect(res.status).to.equal(500);
     expect(res.body).to.have.property('message').that.includes('Internal server error');

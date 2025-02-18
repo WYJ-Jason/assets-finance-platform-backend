@@ -38,4 +38,4 @@ const appSchema = new mongoose.Schema({
 
 const Applications = mongoose.model('applications', appSchema);
 
-module.exports = Applications; 
+module.exports = Applications;

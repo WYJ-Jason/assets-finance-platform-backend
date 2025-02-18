@@ -8,8 +8,9 @@ Resources:
       StageName: Prod
       Cors:
         AllowOrigin: "'*'"
-        AllowMethods: "'OPTIONS,GET,POST'"
+        AllowMethods: "'OPTIONS,GET,POST,PUT,DELETE,PATCH'"
         AllowHeaders: "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'"
+        MaxAge: "'86400'"
 
   ExpressFunction:
     Type: AWS::Serverless::Function
