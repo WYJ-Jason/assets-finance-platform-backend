@@ -3,7 +3,7 @@ const router = express.Router();
 const Applications = require('../models/applications');
 
 router.post('/', async (req, res) => {
-  const { personalDetails, income, expenses, assets, liabilities } = req.body;
+  const { personalDetails, income = {}, expenses = {}, assets = {}, liabilities = {} } = req.body;
   try {
     const newApp = new Applications({
       personalDetails,
