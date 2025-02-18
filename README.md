@@ -110,8 +110,10 @@ src/
 
 The application exposes several API endpoints for managing applications. Each endpoint corresponds to a specific function in the `src/routes` directory.
 
-- **Create Application**: `POST /create-apps`
-- **Read Applications**: `GET /read-apps`
-- **Update Application**: `PUT /update-apps`
-- **Delete Application**: `DELETE /delete-apps`
+- **Create Applications**: `POST /create-apps`
+- **Read Applications by ID**: `GET /read-apps?id=id`
+- **Read Applications by Email**: `GET /read-apps?email=email`
+- **Update Applications**: `PUT /update-apps`
+- **Delete Applications by ID**: `DELETE /delete-apps?id=id`
 
+You can find the api documentation at [API Documentation](https://documenter.getpostman.com/view/36825287/2sAYXFiHWX)
